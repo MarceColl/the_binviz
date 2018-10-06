@@ -1,6 +1,7 @@
 const React = require('react')
 const RegionSelector = require('./region_selector')
 const Vis3D = require('./3d_vis')
+const ImageSearch = require('./image_searcher')
 const Menu = require('./menu')
 
 class App extends React.Component {
@@ -8,12 +9,15 @@ class App extends React.Component {
         super(props)
     }
 
+    componentDidMount() {
+    }
+
     render() {
         return (
             <>
             <RegionSelector />
             <div id="vis">
-                <Vis3D />
+                <ImageSearch />
             </div>
             <Menu />
             </>

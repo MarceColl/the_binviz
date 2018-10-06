@@ -175,7 +175,7 @@ class RegionSelector extends React.Component {
         const data_selection_size = data_selection_end - data_selection_start
         data_selection_start += window_start
 
-        console.log(data_selection_start, data_selection_size)
+        data_manager.set_window(data_selection_start, data_selection_size)
     }
 
     render() {
