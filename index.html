@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>BinViz</title>
+        <style>
+            #app {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                justify-content: stretch;
+                align-content: space-between;
+            }
+
+            #menu {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #detail_selector,
+            #file_selector {
+                flex: 1 1 1;
+                border: 1px solid #aaa;
+            }
+
+            #file_selector {
+                border-right: 0px;
+            }
+
+            #vis {
+                flex: 6 6 0;
+            }
+
+            #menu {
+                flex: 1 1 1;
+                background: #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+        </div>
+
+        <script src="public/bundle.js"></script>
+    </body>
+</html>
