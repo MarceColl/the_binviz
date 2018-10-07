@@ -6,7 +6,7 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
-    mode: 'development',
+	mode: 'production',
     module: {
         rules: [
             {
