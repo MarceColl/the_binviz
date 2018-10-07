@@ -1,52 +1,26 @@
 <html>
     <head>
         <title>BinViz</title>
-        <style>
-            html {
-                font-family: monospace
-            }
-
-            #app {
-                display: flex;
-                height: 100%;
-                width: 100%;
-                justify-content: stretch;
-                align-content: space-between;
-            }
-
-            #menu {
-                display: flex;
-                flex-direction: column;
-            }
-
-            #detail_selector,
-            #file_selector {
-                flex: 1 1 1;
-                border: 1px solid #aaa;
-            }
-
-            #file_selector {
-                border-right: 0px;
-            }
-
-            #vis {
-                flex: 6 6 0;
-            }
-
-            #menu {
-                flex: 1 1 1;
-                background: #eee;
-            }
-
-            #menu input[type="text"] {
-                width: 45px;
-            }
-        </style>
+        <meta charset="UTF-8"> 
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+        <script id="shader-vs" type="x-shader/x-vertex">
+            attribute vec3 aVertexPosition;
+            
+            void main() {
+                gl_Position = vec4(aVertexPosition, 1.0); 
+            }                
+        </script>
+        <script id="shader-fs" type="x-shader/x-fragment">
+            precision mediump float;
+            void main() {
+              gl_FragColor = vec4(0.5, 1.0, 1.0, 1.0);    
+            } 
+        </script>
     </head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <body>
         <div id="app">
         </div>
-
         <script src="public/bundle.js"></script>
     </body>
 </html>

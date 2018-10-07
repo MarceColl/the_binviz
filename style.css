@@ -1,0 +1,243 @@
+html {
+    font-family: monospace;
+    background-color: #000;
+}
+
+#app {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: stretch;
+    align-content: space-between;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#detail_selector,
+#file_selector {
+    flex: 1 1 1;
+    border: 1px solid #aaa;
+}
+
+#file_selector {
+    border-right: 0px;
+}
+
+#vis {
+    flex: 6 6 0;
+}
+
+#vis > canvas {
+    width: 100%;
+}
+
+#vis_config {
+    margin-top: 30px;
+    border-color: #0f0;
+}
+
+#vis_config > span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+#menu {
+    flex: 1 1 1;
+    flex-basis: 300px;
+    background: #000;
+    color: #0f0;
+    align-items: center;
+}
+
+#menu input[type="text"] {
+    width: 45px;
+}
+
+#menu_title {
+    font-family: monospace;
+    white-space: pre;
+    align-self: center;
+    margin-bottom: 30px;
+}
+
+.tools {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    margin-top: 10px;
+}
+
+.upload-btn-wrapper {
+    font-family: monospace;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn {
+    border: 1px solid coral;
+    color: #0f0;
+    background-color: black;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-family: monospace;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #080;
+    margin-top: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    height: 5px;
+    background: #441207;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #080;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #080;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #884f20;
+    background-image: none;
+}
+
+/* Custom Select */
+.select {
+    position: relative;
+    display: block;
+    width: 16em;
+    height: 3em;
+    line-height: 3;
+    background: #2c3e50;
+    overflow: hidden;
+    border-radius: .25em;
+}
+
+select {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .5em;
+    color: #fff;
+    cursor: pointer;
+}
+
+select::-ms-expand {
+    display: none;
+}
+/* Arrow */
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 1em;
+    background: #884f20;
+    pointer-events: none;
+}
+
+/* Transition */
+.select:hover::after {
+    color: #f39c12;
+}
+
+.select::after {
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}

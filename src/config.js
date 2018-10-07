@@ -1,8 +1,9 @@
 config = {
-    current_viz: 'image_searcher',
-    image_searcher: {
+    current_viz: 'ngram',
+    structure: {
         width: 130,
-        offset: 0
+        offset: 0,
+        mode: '64_RGBA'
     }
 }
 
