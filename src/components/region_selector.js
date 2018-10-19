@@ -149,9 +149,9 @@ class RegionSelector extends React.Component {
 
         if(selectors !== undefined) {
             ctx.fillStyle = '#ff000099'
-            ctx.fillRect(0, selectors[0].y, 100, 3)
+            ctx.fillRect(0, 1000/982*selectors[0].y, 100, 3)
             ctx.fillStyle = '#ff000099'
-            ctx.fillRect(0, selectors[1].y, 100, 3)
+            ctx.fillRect(0, 1000/982*selectors[1].y, 100, 3)
         }
     }
 
@@ -175,7 +175,14 @@ class RegionSelector extends React.Component {
         const data_selection_size = data_selection_end - data_selection_start
         data_selection_start += window_start
 
-        data_manager.set_window(data_selection_start, data_selection_size)
+        if (this.timout !== undefined) {
+            clearTimeout(this.timout)
+        }
+
+        this.timout = setTimeout(() => {
+            data_manager.set_window(data_selection_start, data_selection_size)
+        }, 500)
+
     }
 
     render() {

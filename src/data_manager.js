@@ -2,18 +2,25 @@ let file_data
 let curr_dataview
 let data_size
 let analysis_segments
+let curr_analysis
 
 let on_data_change_callbacks = []
 
 let segment_length = 1000
 
+let changed = false
 
 function filter_data(offset, length) {
+    console.log("filter")
     curr_dataview = new DataView(file_data.buffer, offset, length)
 }
 
 function get_current_window() {
     return curr_dataview
+}
+
+function get_current_analysis() {
+    return curr_analysis
 }
 
 function get_all_data() {
@@ -30,6 +37,15 @@ function when_data_changes(fn) {
 
 function set_window(start, size) {
     curr_dataview = new DataView(file_data.buffer, start, size)
+    curr_analysis = get_region_analysis(start, size)
+    curr_analysis.length = size
+    changed = true
+}
+
+function has_changed() {
+    past = changed
+    changed = false
+    return past
 }
 
 function analyze() {
@@ -54,6 +70,9 @@ function analyze() {
 }
 
 function get_region_analysis(start_byte, end_byte) {
+    if (file_data === undefined)
+        return
+
     const start_segment = Math.floor(start_byte/segment_length)
     const end_segment = Math.floor(end_byte/segment_length)
 
@@ -86,6 +105,8 @@ function get_region_analysis(start_byte, end_byte) {
             region_analysis[idx] = 0
         region_analysis[idx] += 1
     }
+
+    return region_analysis
 }
 
 function load_file(file) {
@@ -110,5 +131,7 @@ module.exports = {
     get_all_data,
     set_window,
     get_data,
-    get_region_analysis
+    get_region_analysis,
+    get_current_analysis,
+    has_changed
 }
