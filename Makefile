@@ -4,4 +4,4 @@ all:
 	npx webpack
 
 deploy:
-	
+	echo "TODO"

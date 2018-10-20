@@ -11,7 +11,6 @@ let segment_length = 1000
 let changed = false
 
 function filter_data(offset, length) {
-    console.log("filter")
     curr_dataview = new DataView(file_data.buffer, offset, length)
 }
 
@@ -38,7 +37,7 @@ function when_data_changes(fn) {
 function set_window(start, size) {
     curr_dataview = new DataView(file_data.buffer, start, size)
     curr_analysis = get_region_analysis(start, size)
-    curr_analysis.length = size
+    // curr_analysis.length = size
     changed = true
 }
 
@@ -49,7 +48,7 @@ function has_changed() {
 }
 
 function analyze() {
-    analysis_segments = [] 
+    analysis_segments = []
 
     let segment = {}
     const length = file_data.byteLength
@@ -87,6 +86,7 @@ function get_region_analysis(start_byte, end_byte) {
             }
 
             region_analysis[key] += analysis_segments[i][key]
+            total += 1
         }
     }
 
@@ -96,15 +96,19 @@ function get_region_analysis(start_byte, end_byte) {
         if(region_analysis[idx] === undefined)
             region_analysis[idx] = 0
         region_analysis[idx] += 1
+        total += 1
     }
 
-    const start_last_segment = end_segment * segment_length 
+    const start_last_segment = end_segment * segment_length
     for (let i = start_last_segment; i < end_byte; ++i) {
         const idx = file_data[i] * 1000000 + file_data[i+1] * 1000 + file_data[i+2]
         if(region_analysis[idx] === undefined)
             region_analysis[idx] = 0
         region_analysis[idx] += 1
+        total += 1
     }
+
+    region_analysis.length = total
 
     return region_analysis
 }

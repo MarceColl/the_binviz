@@ -6,13 +6,13 @@ const data_manager = require('../data_manager')
 
 function loadShaderFromDOM(gl, id) {
     var shaderScript = document.getElementById(id);
-    
+
     // If we don't find an element with the specified id
-    // we do an early exit 
+    // we do an early exit
     if (!shaderScript) {
       return null;
     }
-    
+
     // Loop through the children for the found DOM element and
     // build up the shader source code as a string
     var shaderSource = "";
@@ -23,7 +23,7 @@ function loadShaderFromDOM(gl, id) {
       }
       currentChild = currentChild.nextSibling;
     }
-   
+
     var shader;
     if (shaderScript.type == "x-shader/x-fragment") {
       shader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -32,21 +32,21 @@ function loadShaderFromDOM(gl, id) {
     } else {
       return null;
     }
-   
+
     gl.shaderSource(shader, shaderSource);
     gl.compileShader(shader);
-   
+
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
       alert(gl.getShaderInfoLog(shader));
       return null;
-    } 
+    }
     return shader;
 }
 
 function setupShaders(gl) {
     let vertexShader = loadShaderFromDOM(gl, "shader-vs");
     let fragmentShader = loadShaderFromDOM(gl, "shader-fs");
-    
+
     let shaderProgram = gl.createProgram();
     gl.attachShader(shaderProgram, vertexShader);
     gl.attachShader(shaderProgram, fragmentShader);
@@ -56,9 +56,8 @@ function setupShaders(gl) {
     }
     gl.useProgram(shaderProgram);
 
-    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "a_position"); 
+    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "a_position");
 
-    console.log('shader setup')
     return shaderProgram
 }
 
@@ -103,13 +102,12 @@ class Vis3D extends React.Component {
 
         this.vertex_buffer = twgl.createBufferInfoFromArrays(gl, arrays)
 
-        console.log('Buffers setup')
     }
 
     newData() {
         this.data = data_manager.get_all_data()
-        this.refs.file_selector.height = window.innerHeight 
-        this.refs.detail_selector.height = window.innerHeight 
+        this.refs.file_selector.height = window.innerHeight
+        this.refs.detail_selector.height = window.innerHeight
         this.bytes_per_line = this.data.byteLength/this.refs.file_selector.height
         this.updateCanvas()
     }
@@ -151,7 +149,6 @@ class Vis3D extends React.Component {
         }
 
         const arrays = twgl.primitives.createXYQuadVertices();
-        console.log(arrays)
 
         Object.assign(arrays, {
             instanceWorld: {
@@ -168,9 +165,6 @@ class Vis3D extends React.Component {
 
         this.bufferInfo = twgl.createBufferInfoFromArrays(this.gl, arrays);
         this.vertexArrayInfo = twgl.createVertexArrayInfo(this.gl, this.programInfo, this.bufferInfo);
-
-        console.log(this.vertexArrayInfo)
-        console.log(this.bufferInfo)
 
         this.uniforms = {
             u_lightWorldPos: [1, 8, -30],
@@ -203,7 +197,6 @@ class Vis3D extends React.Component {
         const numInstances = data.length
 
         if (data_manager.has_changed()) {
-            console.log("DATA CHANGED")
             let i = 0
             const buffer = new Float32Array(numInstances * 16);
             for (const key in data) {
@@ -213,19 +206,19 @@ class Vis3D extends React.Component {
                 let y = Math.floor(key/1000) - (x * 1000)
                 let z = Math.floor(key) - (x * 1000000 + y * 1000)
 
-                x = (x - 128)/256
-                y = (y - 128)/256
-                z = (z - 128)/256
+                x = ((x - 128)/256) * 8
+                y = ((y - 128)/256) * 8
+                z = ((z - 128)/256) * 8
 
-                const mat = new Float32Array(buffer, i * 16 * 4, 16);
+                const mat = new Float32Array(buffer.buffer, i * 16 * 4, 16);
                 m4.translation([x, y, z], mat);
-                m4.scale(mat, [1, 1, 1], mat)
-                // m4.scale(mat, [0.01, 0.01, 0.01], mat)
+                // m4.scale(mat, [1, 1, 1], mat)
+                m4.scale(mat, [0.01, 0.01, 0.01], mat)
                 i += 1
             }
-            
-            twgl.setAttribInfoBufferFromArray(gl, 
-                this.bufferInfo.attribs.instanceWorld, 
+
+            twgl.setAttribInfoBufferFromArray(gl,
+                this.bufferInfo.attribs.instanceWorld,
                 buffer)
         }
 
