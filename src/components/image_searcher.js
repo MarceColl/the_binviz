@@ -100,7 +100,7 @@ class ImageSearch extends React.Component {
                     return color
                 }
                 idx_function = (idx) => {
-                    return idx + 6 
+                    return idx + 6
                 }
                 break;
             case '24_RGB':

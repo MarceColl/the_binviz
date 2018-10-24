@@ -27,7 +27,7 @@ class Menu extends React.Component {
     }
 
     render() {
-        let config_dom 
+        let config_dom
         if(config.current_viz === 'structure') {
             config_dom = (
                 <>
@@ -71,7 +71,7 @@ class Menu extends React.Component {
  | __ )(_)_ _\ \   / (_)____ <br/>
  |  _ \| | '_ \ \ / /| |_  / <br/>
  | |_) | | | | \ V / | |/ /  <br/>
- |____/|_|_| |_|\_/  |_/___| 
+ |____/|_|_| |_|\_/  |_/___|
                 </div>
                 <div className="upload-btn-wrapper">
                     <button className="btn">Upload a file</button>
@@ -81,19 +81,19 @@ class Menu extends React.Component {
 &nbsp;_____         _      <br/>
 |_   _|__  ___| |___  <br/>
 &nbsp;&nbsp;| |/ _ \/ _ \ (_-&lt;  <br/>
-&nbsp;&nbsp;|_|\___/\___/_/__/  
-                     
+&nbsp;&nbsp;|_|\___/\___/_/__/
+
                 </pre>
                 <div className="tools">
-                    <input type="image" 
+                    <input type="image"
                         name="ngram"
                         onClick={this.selectViz}
-                        src={config.current_viz === 'ngram' ? "binviz-ngram-selected.png" : "binviz-ngram-unselected.png"} 
+                        src={config.current_viz === 'ngram' ? "binviz-ngram-selected.png" : "binviz-ngram-unselected.png"}
                         title="n-gram" />
-                    <input type="image" 
+                    <input type="image"
                         name="structure"
                         onClick={this.selectViz}
-                        src={config.current_viz === 'structure' ? "binviz-structure-selected.png" :"binviz-structure-unselected.png"} 
+                        src={config.current_viz === 'structure' ? "binviz-structure-selected.png" :"binviz-structure-unselected.png"}
                         title="data structure" />
                 </div>
 

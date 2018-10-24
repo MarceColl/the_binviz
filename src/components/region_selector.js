@@ -72,7 +72,7 @@ class RegionSelector extends React.Component {
             const ev_y = ev.offsetY
 
             if(ev.type === 'mousedown') {
-                selector.dragging = true            
+                selector.dragging = true
                 if (Math.abs(ev_y - fst_y) < 8) {
                     selector.dragging_target = 'fst_selector'
                 }
@@ -116,8 +116,8 @@ class RegionSelector extends React.Component {
 
     newData() {
         this.data = data_manager.get_all_data()
-        this.refs.file_selector.height = window.innerHeight 
-        this.refs.detail_selector.height = window.innerHeight 
+        this.refs.file_selector.height = window.innerHeight
+        this.refs.detail_selector.height = window.innerHeight
         this.bytes_per_line = this.data.byteLength/this.refs.file_selector.height
         this.updateCanvas()
     }
@@ -157,7 +157,7 @@ class RegionSelector extends React.Component {
 
     updateCanvas() {
         if(this.data === undefined)
-            return 
+            return
 
         const all_data = new DataView(this.data.buffer, 0, this.data.byteLength)
         this.drawPixelData(this.refs.file_selector, all_data, this.file_selectors.selectors)
